@@ -30,13 +30,19 @@ O `mysql-rotine-maintenance` é um script Python desenvolvido para realizar tare
 
    ```bash
    # Configuração do Banco de Dados
-   host: "localhost.mysql.database.azure.com"  # Endereço do servidor MySQL
+   host: "example.mysql.database.azure.com"  # Endereço do servidor MySQL
    port: 3306                                # Porta do servidor MySQL
-   database: "db"                            # Nome do banco de dados
-   username: "root"                          # Nome de usuário para autenticação
-   password: ""                              # Senha do usuário
-   optimizationFragmentationThreshold: 20    # Porcentagem de fragmentação para otimização
-   dbCertFile: "/path/to/your/azure.cer"     # Caminho para o arquivo do certificado SSL
+   database: "example_db"                    # Nome do banco de dados
+   username: "example_user"                  # Nome de usuário para autenticação
+   password: "example_password"              # Senha do usuário
+   
+   # Caminho para o arquivo do certificado SSL, caso contrario deixe vazio ""
+   dbCertFile: "/path/to/your/azure.cer"
+   
+   # Porcentagem mínima de fragmentação que uma tabela deve ter para ser considerada para otimização.
+   # A fragmentação é a quantidade de espaço livre não utilizado em uma tabela em relação ao espaço total (dados + índices).
+   # Se a fragmentação de uma tabela exceder este valor, a tabela será selecionada para a rotina de otimização.
+   optimizationFragmentationThreshold: 20
 
 ## Uso
 
