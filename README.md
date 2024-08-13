@@ -19,14 +19,14 @@ O `mysql-rotine-maintenance` é um script Python desenvolvido para realizar tare
 
 2. **Configuração do Ambiente**
 
-- **Certifique-se de ter o Python 3 e as bibliotecas necessárias instaladas. Você pode instalar as dependências com o seguinte comando:
+- Certifique-se de ter o Python 3 e as bibliotecas necessárias instaladas. Você pode instalar as dependências com o seguinte comando:
 
    ```bash
    pip install -r requirements.txt
 
 3. **Configuração do Arquivo YAML**
 
-- **Configre os valores do arquivo de configuração YAML chamado config.yaml com os dados do ambiente:
+- Configre os valores do arquivo de configuração YAML chamado config.yaml com os dados do ambiente:
 
    ```bash
    # Configuração do Banco de Dados
@@ -40,6 +40,22 @@ O `mysql-rotine-maintenance` é um script Python desenvolvido para realizar tare
 
 ## Uso
 
-** Para executar o script, utilize o seguinte comando:
-   ```bash
-   python3 mysql_maintenance.py
+**Para executar o script, utilize o seguinte comando:**
+      ```bash
+       python3 mysql_maintenance.py
+       
+** O script irá:
+
+- Conectar-se ao Banco de Dados: Utiliza as configurações definidas no arquivo config.yaml para conectar ao banco de dados MySQL.
+- Verificar Tabelas: Executa a rotina de CHECK TABLE em todas as tabelas do banco de dados.
+- Analisar Tabelas: Executa a rotina de ANALYZE TABLE em todas as tabelas do banco de dados.
+- Otimizar Tabelas: Identifica e otimiza as tabelas que excedem o limite de fragmentação configurado.
+
+## Logs
+**Os logs de execução do script serão armazenados na pasta logs com o nome mysql_rotine.log.**
+
+## Licença
+**Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para detalhes.**
+
+## Contato
+**Para mais informações, entre em contato com jefersonsantos.prog@gmail.com ou abra uma issue no repositório do GitHub.**
