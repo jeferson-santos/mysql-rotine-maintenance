@@ -16,3 +16,30 @@ O `mysql-rotine-maintenance` é um script Python desenvolvido para realizar tare
 
    ```bash
    git clone https://github.com/jeferson-santos/mysql-rotine-maintenance
+
+2. **Configuração do Ambiente**
+
+- **Certifique-se de ter o Python 3 e as bibliotecas necessárias instaladas. Você pode instalar as dependências com o seguinte comando:
+
+   ```bash
+   pip install -r requirements.txt
+
+3. **Configuração do Arquivo YAML**
+
+- **Configre os valores do arquivo de configuração YAML chamado config.yaml com os dados do ambiente:
+
+   ```bash
+   # Configuração do Banco de Dados
+   host: "localhost.mysql.database.azure.com"  # Endereço do servidor MySQL
+   port: 3306                                # Porta do servidor MySQL
+   database: "db"                            # Nome do banco de dados
+   username: "root"                          # Nome de usuário para autenticação
+   password: ""                              # Senha do usuário
+   optimizationFragmentationThreshold: 20    # Porcentagem de fragmentação para otimização
+   dbCertFile: "/path/to/your/azure.cer"     # Caminho para o arquivo do certificado SSL
+
+## Uso
+
+** Para executar o script, utilize o seguinte comando:
+   ```bash
+   python3 mysql_maintenance.py
