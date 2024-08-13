@@ -44,7 +44,7 @@ O `mysql-rotine-maintenance` é um script Python desenvolvido para realizar tare
       ```bash
        python3 mysql_maintenance.py
        
-** O script irá:
+**O script irá:**
 
 - Conectar-se ao Banco de Dados: Utiliza as configurações definidas no arquivo config.yaml para conectar ao banco de dados MySQL.
 - Verificar Tabelas: Executa a rotina de CHECK TABLE em todas as tabelas do banco de dados.
