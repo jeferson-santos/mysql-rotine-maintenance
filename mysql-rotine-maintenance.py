@@ -127,18 +127,18 @@ def main():
         connection = connect_to_db(config)
 
         fragmentation_threshold = config['optimizationFragmentationThreshold']
-
-        # Verifica todas as tabelas no banco de dados
-        check_all_tables(connection)
-
-        # Analisa todas as tabelas no banco de dados
-        analyze_all_tables(connection)
-
+        
         # Otimiza as tabelas que precisam ser otimizadas
         tables_to_optimize = get_tables_to_optimize(connection, fragmentation_threshold)
 
         for table_name in tables_to_optimize:
             optimize_table(connection, table_name)
+            
+        # Verifica todas as tabelas no banco de dados
+        check_all_tables(connection)
+
+        # Analisa todas as tabelas no banco de dados
+        analyze_all_tables(connection)
 
         connection.close()
         logger.info("Rotina de manutenção do MySQL finalizada.")
