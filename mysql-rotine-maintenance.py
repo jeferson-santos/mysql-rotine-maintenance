@@ -86,7 +86,7 @@ def check_all_tables(connection):
     for table_name in tables:
         cursor = connection.cursor()
         try:
-            cursor.execute(f"CHECK TABLE {table_name};")
+            cursor.execute(f"CHECK TABLE {table_name} EXTENDED;")
             result = cursor.fetchall()
             for row in result:
                 logger.info(f"Verificação da tabela {table_name}: {row}")
@@ -127,6 +127,12 @@ def main():
         config = load_db_config(config_file)
         connection = connect_to_db(config)
 
+         # Verifica todas as tabelas no banco de dados
+        check_all_tables(connection)
+
+        # Analisa todas as tabelas no banco de dados
+        analyze_all_tables(connection)
+
         fragmentation_threshold = config['optimizationFragmentationThreshold_Gb']
         
         # Otimiza as tabelas que precisam ser otimizadas
@@ -135,12 +141,6 @@ def main():
         for table_name in tables_to_optimize:
             optimize_table(connection, table_name)
             
-        # Verifica todas as tabelas no banco de dados
-        check_all_tables(connection)
-
-        # Analisa todas as tabelas no banco de dados
-        analyze_all_tables(connection)
-
         connection.close()
         logger.info("Rotina de manutenção do MySQL finalizada.")
 
