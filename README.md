@@ -53,9 +53,9 @@ O `mysql-rotine-maintenance` é um script Python desenvolvido para realizar tare
 **O script irá:**
 
 - Conectar-se ao Banco de Dados: Utiliza as configurações definidas no arquivo config.yaml para conectar ao banco de dados MySQL.
+- Otimizar Tabelas: Identifica e otimiza as tabelas que excedem o limite de fragmentação configurado.
 - Verificar Tabelas: Executa a rotina de CHECK TABLE em todas as tabelas do banco de dados.
 - Analisar Tabelas: Executa a rotina de ANALYZE TABLE em todas as tabelas do banco de dados.
-- Otimizar Tabelas: Identifica e otimiza as tabelas que excedem o limite de fragmentação configurado.
 
 ## Logs
 **Os logs de execução do script serão armazenados na pasta logs com o nome mysql_rotine.log.**
