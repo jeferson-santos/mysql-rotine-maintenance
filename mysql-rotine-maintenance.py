@@ -65,19 +65,20 @@ def get_tables(connection):
         logger.critical(f"Erro ao obter tabelas do banco de dados: {err}")
         raise
 
-def get_tables_to_optimize(connection, fragmentation_threshold):
-    """Obtém uma lista de tabelas que excedem a porcentagem de fragmentação definida."""
+def get_tables_to_optimize(connection, fragmentation_threshold_gb):
+    """Obtém uma lista de tabelas que excedem o valor de fragmentação em GB definido."""
     cursor = connection.cursor()
     query = ("""
-        SELECT TABLE_NAME 
+        SELECT TABLE_NAME, ROUND(DATA_FREE / 1024 / 1024 / 1024, 2) AS Data_free_GB
         FROM information_schema.tables 
         WHERE TABLE_SCHEMA = %s
-        AND DATA_FREE / (DATA_LENGTH + INDEX_LENGTH) * 100 > %s;
+        AND DATA_FREE / 1024 / 1024 / 1024 > %s;
     """)
-    cursor.execute(query, (connection.db.decode(), fragmentation_threshold))  # Usa o database como schema
+    cursor.execute(query, (connection.db.decode(), fragmentation_threshold_gb))  # Usa o database como schema
     tables = cursor.fetchall()
     cursor.close()
-    return [table[0] for table in tables]
+    return [table[0] for table in tables if table[1] > fragmentation_threshold_gb]
+
 
 def check_all_tables(connection):
     """Executa a rotina de CHECK TABLE para todas as tabelas do banco de dados."""
@@ -126,10 +127,10 @@ def main():
         config = load_db_config(config_file)
         connection = connect_to_db(config)
 
-        fragmentation_threshold = config['optimizationFragmentationThreshold']
+        fragmentation_threshold = config['optimizationFragmentationThreshold_Gb']
         
         # Otimiza as tabelas que precisam ser otimizadas
-        tables_to_optimize = get_tables_to_optimize(connection, fragmentation_threshold)
+        tables_to_optimize = get_tables_to_optimize(connection, fragmentation_threshold_gb)
 
         for table_name in tables_to_optimize:
             optimize_table(connection, table_name)
